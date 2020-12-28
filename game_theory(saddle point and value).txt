@@ -1,0 +1,137 @@
+JAVA CODE GAME THEORY
+
+
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package tst;
+
+/**
+ *
+ * @author B.Ramanarayanan
+ */
+  import java.util.*;
+
+public class Tst {
+
+    /**
+     * @param args the command line arguments
+     */
+
+	public static void main(String[] args)
+	{
+		Scanner s = new Scanner(System.in);
+		int m,n,i,j,value = 0,m1 = 0 ,n1 = 0,min,max;
+		System.out.println("Enter dimmension m and n");
+		m=s.nextInt();
+		n=s.nextInt();
+		 int [][] saddle_pt = new int[m][n];
+                 int[]minmax = new int[m];
+                 int []maxmin = new int[n];
+                 System.out.println("Enter the GAME THEORY matrix:");
+		for(i = 0; i<m;i++)
+		{
+
+		 for(j = 0; j<n;j++)
+		 {
+		 	
+		  saddle_pt[i][j] = s.nextInt();
+		 	
+		  }	
+		  }
+		
+           
+          
+   		for(i = 0; i<m;i++)
+		 {
+                   min = saddle_pt[i][0]; 
+		 for(j = 0;j<(n-1);j++)
+		 {
+                       
+                     if(min>saddle_pt[i][j+1])
+                     {
+                         min = saddle_pt[i][j+1];
+                         minmax[i]=min;
+                        // m1 = j+1;
+                     }
+                     else
+                     {
+                         minmax[i] = min;
+                         //m1 = j;
+                     }
+                 
+                     
+                     
+                  }
+                 }
+                for(i = 0; i<n;i++)
+		 {
+                       max = saddle_pt[0][i];     
+		 for(j = 0;j<(m-1);j++)
+		 {
+                       
+                     if(max<saddle_pt[j+1][i])
+                     {
+                         max = saddle_pt[j+1][i];
+                         maxmin[i]=max;
+                        // n1 = j+1;
+                     }
+                     else
+                     {
+                         maxmin[i] = max;
+                         n1 = j;
+                     }
+                 
+                     
+                 }  
+                  }
+                
+                  for(i=0;i<m;i++)
+                {
+		System.out.println("MINMAX VALUE :"+minmax[i]);
+                
+                }
+                   for(i=0;i<n;i++)
+                {
+		System.out.println("MAXMIN VALUE :"+maxmin[i]);
+                
+                }
+                  for(i = 0; i<m;i++)
+		 {
+
+		 for(j = 0;j<n;j++)
+		 {
+                     if(minmax[i]==maxmin[j])
+                     {
+                         value = minmax[i]=maxmin[j];
+                     }
+                  
+                 }
+                 }
+                     for(i = 0; i<m;i++)
+		 {
+
+		 for(j = 0;j<n;j++)
+		 {
+                     if(minmax[i]==maxmin[j])
+                     {
+                         if(saddle_pt[i][j]==value)
+                         {
+                             m1 = i;
+                             n1 = j;
+                         }
+                     }
+                  
+                 }
+                 }
+                
+        
+                  		System.out.println("THE VALUE OF THE GAME :"+value);
+                                System.out.println("SADDLE POINT :"+m1+n1);
+                             
+                 }
+}
+
